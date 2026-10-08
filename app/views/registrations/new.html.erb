@@ -1,0 +1,34 @@
+<main class="mx-auto max-w-md px-6 py-12">
+  <h1 class="mb-6 text-3xl font-bold text-gray-900">Create an account</h1>
+
+  <% if @user.errors.any? %>
+    <div class="mb-6 rounded border border-red-200 bg-red-50 p-4 text-red-700">
+      <ul class="list-disc pl-5">
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with model: @user, url: signup_path, class: "space-y-5" do |form| %>
+    <div>
+      <%= form.label :email, class: "mb-1 block font-medium text-gray-700" %>
+      <%= form.email_field :email, required: true, autofocus: true,
+          class: "w-full rounded border border-gray-300 px-3 py-2" %>
+    </div>
+    <div>
+      <%= form.label :password, class: "mb-1 block font-medium text-gray-700" %>
+      <%= form.password_field :password, required: true,
+          class: "w-full rounded border border-gray-300 px-3 py-2" %>
+    </div>
+    <div>
+      <%= form.label :password_confirmation, "Confirm password",
+          class: "mb-1 block font-medium text-gray-700" %>
+      <%= form.password_field :password_confirmation, required: true,
+          class: "w-full rounded border border-gray-300 px-3 py-2" %>
+    </div>
+    <%= form.submit "Sign up",
+        class: "w-full rounded bg-green-600 px-4 py-2 font-medium text-white hover:bg-green-700" %>
+  <% end %>
+</main>

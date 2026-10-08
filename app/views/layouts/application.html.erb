@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Batch Chef" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Batch Chef">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+  </head>
+
+  <body class="min-h-screen bg-gray-50 text-gray-900">
+    <nav class="border-b border-gray-200 bg-white">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <%= link_to "Batch Chef", root_path, class: "text-xl font-bold text-green-700" %>
+        <div class="flex items-center gap-4">
+          <% if logged_in? %>
+            <span class="text-gray-700">Welcome, <%= current_user.email %></span>
+            <%= button_to "Logout", logout_path, method: :delete,
+                class: "rounded bg-gray-800 px-4 py-2 text-white hover:bg-gray-900" %>
+          <% else %>
+            <%= link_to "Login", login_path, class: "text-green-700 hover:underline" %>
+            <%= link_to "Sign up", signup_path,
+                class: "rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <% if flash[:notice] %>
+      <div class="mx-auto mt-4 max-w-6xl rounded border border-green-200 bg-green-50 px-6 py-3 text-green-800">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>
