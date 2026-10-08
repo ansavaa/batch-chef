@@ -1166,3 +1166,28 @@ Processing by PagesController#ui_kit as HTML
 Completed 200 OK in 11ms (Views: 3.7ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/ui?recipe_title=&diameter=" for ::1 at 2026-10-08 23:37:48 +0300
+Processing by PagesController#ui_kit as HTML
+  Parameters: {"recipe_title"=>"", "diameter"=>""}
+  [1m[36mUser Load (89.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='ui_kit',application='BakeAndBrew',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/ui_kit.html.erb within layouts/application
+  Rendered pages/ui_kit.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.2ms | GC: 0.0ms)
+Completed 200 OK in 101ms (Views: 5.1ms | ActiveRecord: 89.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+Started GET "/ui?recipe_title=&diameter=" for ::1 at 2026-10-08 23:39:42 +0300
+Processing by PagesController#ui_kit as HTML
+  Parameters: {"recipe_title"=>"", "diameter"=>""}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='ui_kit',application='BakeAndBrew',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/ui_kit.html.erb within layouts/application
+  Rendered pages/ui_kit.html.erb within layouts/application (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.0ms | GC: 0.4ms)
+Completed 200 OK in 45ms (Views: 3.6ms | ActiveRecord: 20.7ms (1 query, 0 cached) | GC: 9.8ms)
+
+
