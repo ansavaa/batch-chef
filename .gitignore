@@ -1,0 +1,6 @@
+/.bundle
+/log/*
+/tmp/*
+/storage/*
+/public/assets
+.DS_Store
