@@ -1142,3 +1142,27 @@ Processing by PagesController#ui_kit as HTML
 Completed 200 OK in 12ms (Views: 5.1ms | ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.0ms)
 
 
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+Started GET "/ui" for ::1 at 2026-10-08 23:34:49 +0300
+Processing by PagesController#ui_kit as HTML
+  [1m[36mUser Load (893.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='ui_kit',application='BakeAndBrew',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/ui_kit.html.erb within layouts/application
+  Rendered pages/ui_kit.html.erb within layouts/application (Duration: 0.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.3ms | GC: 0.3ms)
+Completed 200 OK in 911ms (Views: 7.1ms | ActiveRecord: 995.0ms (1 query, 0 cached) | GC: 0.7ms)
+
+
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+Started GET "/ui" for ::1 at 2026-10-08 23:35:46 +0300
+Processing by PagesController#ui_kit as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='ui_kit',application='BakeAndBrew',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/ui_kit.html.erb within layouts/application
+  Rendered pages/ui_kit.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.9ms | GC: 0.0ms)
+Completed 200 OK in 11ms (Views: 3.7ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
