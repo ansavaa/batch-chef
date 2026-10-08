@@ -1,24 +1,29 @@
-# README
+# 🍳 Batch Chef
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Batch Chef** — это веб-приложение на Ruby on Rails, созданное специально для кулинаров и кондитеров. 
 
-Things you may want to cover:
+В отличие от обычных кулинарных блогов, это приложение решает главную практическую боль: **автоматический пересчет граммовок** под нужный размер формы или количество порций, а также предоставляет удобный интерфейс для процесса готовки.
 
-* Ruby version
+## ✨ Ключевые возможности
 
-* System dependencies
+* **Умный калькулятор граммовок:** Масштабирование рецептов по коэффициенту порций или математический пересчет под новый диаметр формы (через соотношение площадей).
+* **Модульная структура рецепта:** Деление сложных десертов на логические блоки (например: отдельно меренга, отдельно лимонный курд, отдельно крем).
+* **Интерактивный режим "На кухне":** Удобный формат чтения рецепта во время готовки с крупным шрифтом, зачеркиванием выполненных шагов и встроенными таймерами.
+* **Кастомная авторизация:** Безопасная система регистрации и входа на базе встроенного механизма сессий и `bcrypt` (без перегруженных библиотек вроде Devise).
+* **Кулинарный UI-kit:** Эстетичный и понятный интерфейс в пастельных тонах, спроектированный с акцентом на удобство пользователя (UX).
 
-* Configuration
+## 🛠 Стек технологий
 
-* Database creation
+* **Backend:** Ruby 3.3.6, Ruby on Rails (v7/8)
+* **Database:** PostgreSQL
+* **Frontend:** HTML/ERB, Tailwind CSS, Hotwire (Turbo + Stimulus)
+* **Authentication:** `has_secure_password` (gem 'bcrypt')
 
-* Database initialization
+## 🚀 Как запустить проект локально
 
-* How to run the test suite
+Для запуска приложения на вашем компьютере должны быть установлены Ruby, PostgreSQL и пакетный менеджер Bundler.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. **Клонируйте репозиторий:**
+   ```bash
+   git clone [https://github.com/ansavaa/batch-chef.git](https://github.com/ansavaa/batch-chef.git)
+   cd batch-chef    
