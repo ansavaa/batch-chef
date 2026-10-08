@@ -891,3 +891,254 @@ Processing by PagesController#ui_kit as HTML
 Completed 200 OK in 4ms (Views: 0.9ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.5ms)
 
 
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+  [1m[35mSQL (0.4ms)[0m  [1m[35mSET search_path TO public /*application='BakeAndBrew'*/[0m
+  [1m[35m (46.8ms)[0m  [1m[35mCREATE DATABASE "bake_and_brew_development" ENCODING = 'unicode' /*application='BakeAndBrew'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='BakeAndBrew'*/[0m
+  [1m[35m (10.0ms)[0m  [1m[35mCREATE DATABASE "bake_and_brew_test" ENCODING = 'unicode' /*application='BakeAndBrew'*/[0m
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2744133594058446450) /*application='BakeAndBrew'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='BakeAndBrew'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='BakeAndBrew'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2744133594058446450) /*application='BakeAndBrew'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='BakeAndBrew'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='BakeAndBrew'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='BakeAndBrew'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='BakeAndBrew'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='BakeAndBrew'*/[0m
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+Started GET "/" for ::1 at 2026-10-08 22:49:46 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='BakeAndBrew'*/[0m
+Processing by PagesController#ui_kit as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='ui_kit',application='BakeAndBrew',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/ui_kit.html.erb within layouts/application
+  Rendered pages/ui_kit.html.erb within layouts/application (Duration: 0.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.5ms | GC: 0.0ms)
+Completed 200 OK in 63ms (Views: 6.7ms | ActiveRecord: 16.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2026-10-08 22:49:46 +0300
+Processing by PagesController#ui_kit as HTML
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='ui_kit',application='BakeAndBrew',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/ui_kit.html.erb within layouts/application
+  Rendered pages/ui_kit.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.4ms | GC: 0.0ms)
+Completed 200 OK in 8ms (Views: 2.0ms | ActiveRecord: 1.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/logout" for ::1 at 2026-10-08 22:52:41 +0300
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (3.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='destroy',application='BakeAndBrew',controller='sessions'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+Redirected to http://localhost:3000/login
+↳ app/controllers/sessions_controller.rb:19:in `destroy'
+Completed 302 Found in 6ms (ActiveRecord: 3.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for ::1 at 2026-10-08 22:52:41 +0300
+Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT 1 /*action='new',application='BakeAndBrew',controller='sessions'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 3.7ms | GC: 0.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.1ms | GC: 0.6ms)
+Completed 200 OK in 8ms (Views: 5.9ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.6ms)
+
+
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='BakeAndBrew'*/[0m
+  [1m[35m (39.7ms)[0m  [1m[35mCREATE DATABASE "bake_and_brew_development" ENCODING = 'unicode' /*application='BakeAndBrew'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='BakeAndBrew'*/[0m
+  [1m[35m (8.8ms)[0m  [1m[35mCREATE DATABASE "bake_and_brew_test" ENCODING = 'unicode' /*application='BakeAndBrew'*/[0m
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2744133594058446450) /*application='BakeAndBrew'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='BakeAndBrew'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='BakeAndBrew'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(2744133594058446450) /*application='BakeAndBrew'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='BakeAndBrew'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='BakeAndBrew'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='BakeAndBrew'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mSET search_path TO public /*application='BakeAndBrew'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='BakeAndBrew'*/[0m
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='BakeAndBrew'*/[0m
+  [1m[35m (13.3ms)[0m  [1m[35mCREATE DATABASE "bake_and_brew_development" ENCODING = 'unicode' /*application='BakeAndBrew'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='BakeAndBrew'*/[0m
+  [1m[35m (11.7ms)[0m  [1m[35mCREATE DATABASE "bake_and_brew_test" ENCODING = 'unicode' /*application='BakeAndBrew'*/[0m
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2744133594058446450) /*application='BakeAndBrew'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='BakeAndBrew'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='BakeAndBrew'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(2744133594058446450) /*application='BakeAndBrew'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='BakeAndBrew'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='BakeAndBrew'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='BakeAndBrew'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='BakeAndBrew'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='BakeAndBrew'*/[0m
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+Started GET "/ui" for 127.0.0.1 at 2026-10-08 23:03:47 +0300
+Processing by PagesController#ui_kit as */*
+  [1m[36mUser Load (64.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT 1 /*action='ui_kit',application='BakeAndBrew',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/ui_kit.html.erb within layouts/application
+  Rendered pages/ui_kit.html.erb within layouts/application (Duration: 0.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.2ms | GC: 0.0ms)
+Completed 200 OK in 75ms (Views: 2.9ms | ActiveRecord: 93.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+Started GET "/ui" for 127.0.0.1 at 2026-10-08 23:04:09 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='BakeAndBrew'*/[0m
+Processing by PagesController#ui_kit as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT 1 /*action='ui_kit',application='BakeAndBrew',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/ui_kit.html.erb within layouts/application
+  Rendered pages/ui_kit.html.erb within layouts/application (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.2ms | GC: 0.0ms)
+Completed 200 OK in 44ms (Views: 6.9ms | ActiveRecord: 15.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for ::1 at 2026-10-08 23:04:42 +0300
+Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT 1 /*action='new',application='BakeAndBrew',controller='sessions'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 3.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.8ms | GC: 0.0ms)
+Completed 200 OK in 13ms (Views: 5.3ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2026-10-08 23:04:43 +0300
+Processing by PagesController#ui_kit as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT 1 /*action='ui_kit',application='BakeAndBrew',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/ui_kit.html.erb within layouts/application
+  Rendered pages/ui_kit.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 0.5ms | GC: 0.0ms)
+Completed 200 OK in 3ms (Views: 0.8ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ui" for ::1 at 2026-10-08 23:05:28 +0300
+Processing by PagesController#ui_kit as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT 1 /*action='ui_kit',application='BakeAndBrew',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/ui_kit.html.erb within layouts/application
+  Rendered pages/ui_kit.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.6ms | GC: 0.0ms)
+Completed 200 OK in 8ms (Views: 3.0ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ui" for ::1 at 2026-10-08 23:05:29 +0300
+Processing by PagesController#ui_kit as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT 1 /*action='ui_kit',application='BakeAndBrew',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/ui_kit.html.erb within layouts/application
+  Rendered pages/ui_kit.html.erb within layouts/application (Duration: 0.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | GC: 0.0ms)
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for ::1 at 2026-10-08 23:05:33 +0300
+Processing by SessionsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT 1 /*action='new',application='BakeAndBrew',controller='sessions'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.5ms | GC: 0.0ms)
+Completed 200 OK in 5ms (Views: 1.8ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2026-10-08 23:06:22 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "commit"=>"Войти"}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT 1 /*action='create',application='BakeAndBrew',controller='sessions'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  [1m[36mUser Load (3.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'annasavochkina@gmail.com' LIMIT 1 /*action='create',application='BakeAndBrew',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:6:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.3ms | GC: 0.0ms)
+Completed 422 Unprocessable Content in 16ms (Views: 1.7ms | ActiveRecord: 5.5ms (2 queries, 0 cached) | GC: 0.5ms)
+
+
+Started POST "/login" for ::1 at 2026-10-08 23:06:41 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "commit"=>"Войти"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT 1 /*action='create',application='BakeAndBrew',controller='sessions'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'annasavockina78@gmail.com' LIMIT 1 /*action='create',application='BakeAndBrew',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:6:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.5ms | GC: 0.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.0ms | GC: 0.6ms)
+Completed 422 Unprocessable Content in 6ms (Views: 2.6ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.6ms)
+
+
+Started POST "/login" for ::1 at 2026-10-08 23:12:09 +0300
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "email"=>"[FILTERED]", "password"=>"[FILTERED]", "commit"=>"Войти"}
+  [1m[36mUser Load (70.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT 1 /*action='create',application='BakeAndBrew',controller='sessions'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'asavockina78@gmail.com' LIMIT 1 /*action='create',application='BakeAndBrew',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:6:in `create'
+Redirected to http://localhost:3000/ui
+↳ app/controllers/sessions_controller.rb:10:in `create'
+Completed 302 Found in 345ms (ActiveRecord: 86.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ui" for ::1 at 2026-10-08 23:12:10 +0300
+Processing by PagesController#ui_kit as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='ui_kit',application='BakeAndBrew',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/ui_kit.html.erb within layouts/application
+  Rendered pages/ui_kit.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.2ms | GC: 0.0ms)
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ui" for ::1 at 2026-10-08 23:14:28 +0300
+Processing by PagesController#ui_kit as HTML
+  [1m[36mUser Load (40.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='ui_kit',application='BakeAndBrew',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/ui_kit.html.erb within layouts/application
+  Rendered pages/ui_kit.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.0ms | GC: 0.0ms)
+Completed 200 OK in 50ms (Views: 3.4ms | ActiveRecord: 40.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ui" for ::1 at 2026-10-08 23:15:04 +0300
+Processing by PagesController#ui_kit as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 2 LIMIT 1 /*action='ui_kit',application='BakeAndBrew',controller='pages'*/[0m
+  ↳ app/controllers/application_controller.rb:21:in `set_current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering pages/ui_kit.html.erb within layouts/application
+  Rendered pages/ui_kit.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.4ms | GC: 0.0ms)
+Completed 200 OK in 12ms (Views: 5.1ms | ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+

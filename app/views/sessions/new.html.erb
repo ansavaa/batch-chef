@@ -1,24 +1,42 @@
-<main class="mx-auto max-w-md px-6 py-12">
-  <h1 class="mb-6 text-3xl font-bold text-gray-900">Login</h1>
+<main class="flex min-h-[calc(100vh-73px)] items-center justify-center bg-[#f8f1e7] px-6 py-12">
+  <section class="w-full max-w-md rounded-3xl border border-[#eadbce] bg-[#fffdf9] p-8 shadow-[0_20px_55px_rgba(113,82,62,0.12)] sm:p-10">
+    <div class="mb-8 text-center">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-[#b86f62]">
+        Batch Chef
+      </p>
+      <h1 class="font-serif text-4xl text-[#4b3832]">Вход в Batch Chef</h1>
+      <p class="mt-3 text-[#8b786b]">Продолжите создавать любимые рецепты</p>
+    </div>
 
-  <% if flash[:alert] %>
-    <div class="mb-6 rounded border border-red-200 bg-red-50 p-4 text-red-700">
-      <%= flash[:alert] %>
-    </div>
-  <% end %>
+    <% if flash[:alert] %>
+      <div class="mb-6 rounded-2xl border border-[#efc7bd] bg-[#fff0eb] p-4 text-sm text-[#a85f53]">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
 
-  <%= form_with url: login_path, class: "space-y-5" do |form| %>
-    <div>
-      <%= form.label :email, class: "mb-1 block font-medium text-gray-700" %>
-      <%= form.email_field :email, required: true, autofocus: true,
-          class: "w-full rounded border border-gray-300 px-3 py-2" %>
-    </div>
-    <div>
-      <%= form.label :password, class: "mb-1 block font-medium text-gray-700" %>
-      <%= form.password_field :password, required: true,
-          class: "w-full rounded border border-gray-300 px-3 py-2" %>
-    </div>
-    <%= form.submit "Login",
-        class: "w-full rounded bg-green-600 px-4 py-2 font-medium text-white hover:bg-green-700" %>
-  <% end %>
+    <%= form_with url: login_path, class: "space-y-5" do |form| %>
+      <div>
+        <%= form.label :email, "Email", class: "mb-2 block text-sm font-semibold text-[#5f5048]" %>
+        <%= form.email_field :email, required: true, autofocus: true,
+            placeholder: "you@example.com",
+            class: "w-full rounded-2xl border border-[#decfc2] bg-[#fffaf5] px-4 py-3 text-[#4b3832] outline-none placeholder:text-[#b8aaa0] focus:border-[#d98d78] focus:ring-2 focus:ring-[#f0c4b8]" %>
+      </div>
+
+      <div>
+        <%= form.label :password, "Пароль", class: "mb-2 block text-sm font-semibold text-[#5f5048]" %>
+        <%= form.password_field :password, required: true,
+            placeholder: "Введите пароль",
+            class: "w-full rounded-2xl border border-[#decfc2] bg-[#fffaf5] px-4 py-3 text-[#4b3832] outline-none placeholder:text-[#b8aaa0] focus:border-[#d98d78] focus:ring-2 focus:ring-[#f0c4b8]" %>
+      </div>
+
+      <%= form.submit "Войти",
+          class: "w-full rounded-full bg-[#d98d78] px-6 py-3 font-semibold text-white shadow-[0_8px_18px_rgba(185,103,83,0.2)] transition hover:bg-[#c97967]" %>
+    <% end %>
+
+    <p class="mt-8 text-center text-sm text-[#8b786b]">
+      Нет аккаунта?
+      <%= link_to "Зарегистрироваться", signup_path,
+          class: "font-semibold text-[#a85f53] underline decoration-[#e9b6aa] underline-offset-4 hover:text-[#874d45]" %>
+    </p>
+  </section>
 </main>
