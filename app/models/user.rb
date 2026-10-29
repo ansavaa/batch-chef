@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
+  has_many :recipes, dependent: :destroy
+  has_many :recipes, dependent: :destroy
 
   before_validation :normalize_email
 

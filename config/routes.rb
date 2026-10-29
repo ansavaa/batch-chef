@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy", as: :logout
 
+  resources :recipes
   get "/ui", to: "pages#ui_kit", as: :ui_kit
 
   root "pages#ui_kit"

@@ -1,0 +1,36 @@
+<main class="mx-auto max-w-4xl space-y-8 px-6 py-10">
+  <div class="flex items-center justify-between gap-4">
+    <div>
+      <h1 class="font-serif text-4xl font-semibold text-stone-900">Мои рецепты</h1>
+      <p class="mt-2 text-stone-600">Все рецепты, сохранённые в вашем аккаунте.</p>
+    </div>
+
+    <%= link_to "Новый рецепт", new_recipe_path,
+        class: "rounded-xl bg-rose-300 px-4 py-3 font-semibold text-stone-900 hover:bg-rose-400" %>
+  </div>
+
+  <% if @recipes.any? %>
+    <div class="grid gap-4">
+      <% @recipes.each do |recipe| %>
+        <article class="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
+          <h2 class="font-serif text-2xl font-semibold text-stone-900">
+            <%= link_to recipe.title, recipe_path(recipe),
+                class: "hover:text-rose-600" %>
+          </h2>
+          <p class="mt-2 text-sm text-stone-500">
+            Диаметр формы:
+            <%= recipe.base_diameter.presence || "не указан" %> см ·
+            Порции:
+            <%= recipe.base_portions.presence || "не указаны" %>
+          </p>
+        </article>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="rounded-2xl border border-dashed border-stone-300 bg-white p-8 text-center">
+      <p class="text-stone-600">У вас пока нет сохранённых рецептов.</p>
+      <%= link_to "Создать первый рецепт", new_recipe_path,
+          class: "mt-4 inline-block text-rose-600 underline" %>
+    </div>
+  <% end %>
+</main>
