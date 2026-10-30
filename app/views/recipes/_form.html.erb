@@ -52,15 +52,24 @@
   </section>
 
   <section>
-    <div class="mb-3">
-      <h2 class="font-serif text-2xl font-semibold text-stone-900">Шаги приготовления</h2>
-      <p class="text-sm text-stone-500">Опишите последовательность действий.</p>
+    <div class="mb-3 flex items-center justify-between gap-3">
+      <div>
+        <h2 class="font-serif text-2xl font-semibold text-stone-900">Шаги приготовления</h2>
+        <p class="text-sm text-stone-500">Опишите последовательность действий.</p>
+      </div>
+      <button type="button" id="add-step" class="rounded-xl border border-stone-300 px-3 py-2 text-sm font-medium hover:bg-rose-50">
+        + Добавить шаг
+      </button>
     </div>
-    <div class="space-y-3">
+    <div id="steps-fields" class="space-y-3">
       <%= form.fields_for :steps do |step_form| %>
-        <div class="rounded-xl border border-stone-200 bg-stone-50 p-4">
+        <div class="step-row rounded-xl border border-stone-200 bg-stone-50 p-4">
           <%= step_form.text_area :description, rows: 2, placeholder: "Например, взбейте яйца с сахаром", class: "w-full rounded-lg border border-stone-300 px-3 py-2 focus:border-rose-300 focus:ring-2 focus:ring-rose-200" %>
           <%= step_form.hidden_field :is_completed, value: "0" %>
+          <%= step_form.hidden_field :_destroy, value: "0", class: "step-destroy-field" %>
+          <button type="button" class="remove-step mt-2 rounded-lg px-2 py-1 text-sm text-stone-500 hover:bg-rose-50 hover:text-rose-600">
+            Удалить шаг
+          </button>
         </div>
       <% end %>
     </div>
@@ -85,6 +94,15 @@
   </div>
 </template>
 
+<template id="step-template">
+  <div class="step-row rounded-xl border border-stone-200 bg-stone-50 p-4">
+    <textarea name="recipe[steps_attributes][NEW_RECORD][description]" rows="2" placeholder="Например, взбейте яйца с сахаром" class="w-full rounded-lg border border-stone-300 px-3 py-2 focus:border-rose-300 focus:ring-2 focus:ring-rose-200"></textarea>
+    <input type="hidden" name="recipe[steps_attributes][NEW_RECORD][is_completed]" value="0">
+    <input type="hidden" name="recipe[steps_attributes][NEW_RECORD][_destroy]" value="0" class="step-destroy-field">
+    <button type="button" class="remove-step mt-2 rounded-lg px-2 py-1 text-sm text-stone-500 hover:bg-rose-50 hover:text-rose-600">Удалить шаг</button>
+  </div>
+</template>
+
 <script>
   (() => {
     const addButton = document.getElementById("add-ingredient");
@@ -103,6 +121,31 @@
 
       const row = event.target.closest(".ingredient-row");
       const destroyField = row.querySelector(".destroy-field");
+
+      if (destroyField) {
+        destroyField.value = "1";
+        row.hidden = true;
+      } else {
+        row.remove();
+      }
+    });
+
+    const addStepButton = document.getElementById("add-step");
+    const stepsFields = document.getElementById("steps-fields");
+    const stepTemplate = document.getElementById("step-template");
+
+    if (!addStepButton || !stepsFields || !stepTemplate) return;
+
+    addStepButton.addEventListener("click", () => {
+      const key = Date.now().toString();
+      stepsFields.insertAdjacentHTML("beforeend", stepTemplate.innerHTML.replaceAll("NEW_RECORD", key));
+    });
+
+    stepsFields.addEventListener("click", (event) => {
+      if (!event.target.classList.contains("remove-step")) return;
+
+      const row = event.target.closest(".step-row");
+      const destroyField = row.querySelector(".step-destroy-field");
 
       if (destroyField) {
         destroyField.value = "1";
