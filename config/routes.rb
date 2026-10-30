@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy", as: :logout
 
   get "/catalog", to: "recipes#public_index", as: :public_recipes
-  resources :recipes
+  resources :recipes do
+    member do
+      patch :toggle_publication
+    end
+  end
   get "/ui", to: "pages#ui_kit", as: :ui_kit
 
   root "pages#ui_kit"

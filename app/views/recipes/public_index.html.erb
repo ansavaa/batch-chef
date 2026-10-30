@@ -4,18 +4,31 @@
     <p class="mt-2 text-stone-600">Рецепты Batch Chef для вдохновения.</p>
   </div>
 
+  <%= form_with url: public_recipes_path, method: :get, class: "flex gap-3" do |form| %>
+    <%= form.search_field :q, value: @query, placeholder: "Найти рецепт по названию",
+        class: "w-full rounded-xl border border-stone-300 px-4 py-3 focus:border-rose-300 focus:ring-2 focus:ring-rose-200" %>
+    <%= form.submit "Найти", class: "rounded-xl bg-rose-300 px-5 py-3 font-semibold text-stone-900 hover:bg-rose-400" %>
+  <% end %>
+
   <div class="grid gap-5 md:grid-cols-2">
     <% @recipes.each do |recipe| %>
       <article class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
-        <h2 class="font-serif text-2xl font-semibold text-stone-900"><%= recipe.title %></h2>
+        <h2 class="font-serif text-2xl font-semibold text-stone-900">
+          <%= link_to recipe.title, recipe_path(recipe), class: "hover:text-rose-600" %>
+        </h2>
         <p class="mt-2 text-sm text-stone-500">
           Форма: <%= recipe.base_diameter.presence || "—" %> см ·
           Порции: <%= recipe.base_portions.presence || "—" %>
         </p>
-        <% if logged_in? && recipe.user_id == current_user.id %>
-          <%= link_to "Открыть рецепт", recipe_path(recipe), class: "mt-4 inline-block text-rose-600 underline" %>
-        <% end %>
+        <%= link_to "Открыть рецепт", recipe_path(recipe),
+            class: "mt-4 inline-block text-rose-600 underline" %>
       </article>
     <% end %>
   </div>
+
+  <% if @recipes.empty? %>
+    <p class="rounded-2xl border border-dashed border-stone-300 bg-white p-8 text-center text-stone-600">
+      По вашему запросу рецепты не найдены.
+    </p>
+  <% end %>
 </main>

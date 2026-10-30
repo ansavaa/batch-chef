@@ -1,17 +1,33 @@
 class RecipesController < ApplicationController
-  before_action :require_login, except: :public_index
+  before_action :require_login, except: %i[public_index show]
 
   def index
     @recipes = @current_user.recipes
   end
 
   def show
-    @recipe = @current_user.recipes.find(params[:id])
+    @recipe = Recipe.find(params[:id])
+    unless @recipe.published? || (@current_user && @recipe.user_id == @current_user.id)
+      redirect_to root_path, alert: "Этот рецепт ещё не опубликован."
+      return
+    end
+
     @scaled_ingredients = scaled_ingredients_with_cost
   end
 
   def public_index
-    @recipes = Recipe.all.order(created_at: :desc)
+    @query = params[:q].to_s.strip
+    @recipes = Recipe.published
+                    .where("title ILIKE ?", "%#{ActiveRecord::Base.sanitize_sql_like(@query)}%")
+                    .order(created_at: :desc)
+  end
+
+  def toggle_publication
+    @recipe = @current_user.recipes.find(params[:id])
+    @recipe.update!(published: !@recipe.published?)
+
+    status = @recipe.published? ? "опубликован" : "снят с публикации"
+    redirect_to recipes_path, notice: "Рецепт «#{@recipe.title}» #{status}."
   end
 
   def new

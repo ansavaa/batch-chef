@@ -22,26 +22,38 @@
     <section aria-labelledby="catalog-heading" class="space-y-4">
       <div>
         <h2 id="catalog-heading" class="font-serif text-2xl font-semibold text-stone-900">Каталог</h2>
-        <p class="mt-1 text-sm text-stone-500">Пример карточки рецепта Batch Chef.</p>
+        <p class="mt-1 text-sm text-stone-500">Публичные рецепты сообщества Batch Chef.</p>
       </div>
-      <article class="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm sm:flex">
-        <div class="flex min-h-56 items-center justify-center bg-rose-100 px-8 text-center text-rose-500 sm:w-2/5">
-          <div><span class="text-5xl" aria-hidden="true">🍓</span><p class="mt-3 text-sm font-medium">Фото рецепта</p></div>
+      <%= form_with url: root_path, method: :get, class: "flex gap-3" do |form| %>
+        <%= form.search_field :q, value: @catalog_query, placeholder: "Найти рецепт по названию",
+            class: "w-full rounded-xl border border-stone-300 bg-white px-4 py-3 focus:border-rose-300 focus:ring-2 focus:ring-rose-200" %>
+        <%= form.submit "Найти", class: "rounded-xl bg-rose-300 px-5 py-3 font-semibold text-stone-900 hover:bg-rose-400" %>
+      <% end %>
+
+      <% if @catalog_recipes.any? %>
+        <div class="grid gap-5 md:grid-cols-2">
+          <% @catalog_recipes.each do |recipe| %>
+            <article class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+              <h3 class="font-serif text-2xl font-semibold text-stone-900">
+                <%= link_to recipe.title, recipe_path(recipe), class: "hover:text-rose-600" %>
+              </h3>
+              <p class="mt-3 text-sm text-stone-500">
+                Форма: <%= recipe.base_diameter.presence || "—" %> см ·
+                Порции: <%= recipe.base_portions.presence || "—" %>
+              </p>
+              <%= link_to "Открыть рецепт", recipe_path(recipe),
+                  class: "mt-4 inline-block text-rose-600 underline" %>
+            </article>
+          <% end %>
         </div>
-        <div class="flex flex-1 flex-col justify-between gap-5 p-6">
-          <div>
-            <div class="mb-3 flex flex-wrap gap-2">
-              <span class="rounded-full bg-rose-100 px-3 py-1 text-xs font-semibold text-rose-700">#десерт</span>
-              <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">#выпечка</span>
-            </div>
-            <h3 class="font-serif text-3xl font-semibold text-stone-900">Клубничный торт</h3>
-            <p class="mt-3 text-sm text-stone-500">⏱️ Время приготовления: 45 минут</p>
-          </div>
-          <button type="button" class="rounded-xl bg-rose-300 px-5 py-3 font-semibold text-stone-900 hover:bg-rose-400">
-            Открыть рецепт
-          </button>
-        </div>
-      </article>
+      <% else %>
+        <p class="rounded-2xl border border-dashed border-stone-300 bg-white p-8 text-center text-stone-600">
+          Пока нет опубликованных рецептов.
+        </p>
+      <% end %>
+
+      <%= link_to "Открыть весь каталог", public_recipes_path,
+          class: "inline-block text-rose-600 underline" %>
     </section>
   </div>
 </main>

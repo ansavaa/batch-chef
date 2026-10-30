@@ -23,6 +23,17 @@
             Порции:
             <%= recipe.base_portions.presence || "не указаны" %>
           </p>
+          <div class="mt-4 flex flex-wrap items-center gap-3">
+            <% if recipe.published? %>
+              <span class="rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-700">Опубликован</span>
+              <%= button_to "Снять с публикации", toggle_publication_recipe_path(recipe), method: :patch,
+                  class: "rounded-xl border border-stone-300 px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50" %>
+            <% else %>
+              <span class="rounded-full bg-stone-100 px-3 py-1 text-sm font-medium text-stone-600">Приватный</span>
+              <%= button_to "Опубликовать в каталог", toggle_publication_recipe_path(recipe), method: :patch,
+                  class: "rounded-xl bg-rose-300 px-3 py-2 text-sm font-semibold text-stone-900 hover:bg-rose-400" %>
+            <% end %>
+          </div>
         </article>
       <% end %>
     </div>
