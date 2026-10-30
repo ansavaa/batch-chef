@@ -21,6 +21,8 @@
         <%= link_to "Batch Chef", root_path, class: "text-xl font-bold text-green-700" %>
         <div class="flex items-center gap-4">
           <% if logged_in? %>
+            <%= link_to "Мои рецепты", recipes_path,
+                class: "rounded-xl bg-rose-100 px-4 py-2 font-medium text-rose-700 hover:bg-rose-200" %>
             <span class="text-gray-700">Welcome, <%= current_user.email %></span>
             <%= button_to "Logout", logout_path, method: :delete,
                 class: "rounded bg-gray-800 px-4 py-2 text-white hover:bg-gray-900" %>
@@ -36,6 +38,12 @@
     <% if flash[:notice] %>
       <div class="mx-auto mt-4 max-w-6xl rounded border border-green-200 bg-green-50 px-6 py-3 text-green-800">
         <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="mx-auto mt-4 max-w-6xl rounded border border-rose-200 bg-rose-50 px-6 py-3 text-rose-800">
+        <%= flash[:alert] %>
       </div>
     <% end %>
 

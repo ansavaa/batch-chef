@@ -1,19 +1,81 @@
-<main class="mx-auto max-w-2xl px-6 py-10">
-  <div class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
-    <h1 class="font-serif text-4xl font-semibold text-stone-900"><%= @recipe.title %></h1>
-
-    <dl class="mt-6 space-y-3 text-stone-700">
-      <div class="flex justify-between border-b border-stone-100 pb-3">
-        <dt>Диаметр формы</dt>
-        <dd><%= @recipe.base_diameter.presence || "Не указан" %> см</dd>
-      </div>
-      <div class="flex justify-between border-b border-stone-100 pb-3">
-        <dt>Количество порций</dt>
-        <dd><%= @recipe.base_portions.presence || "Не указано" %></dd>
-      </div>
-    </dl>
-
-    <%= link_to "Вернуться к рецептам", recipes_path,
-        class: "mt-6 inline-block text-rose-600 underline" %>
+<main class="mx-auto max-w-3xl space-y-8 px-6 py-10">
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <h1 class="font-serif text-4xl font-semibold text-stone-900"><%= @recipe.title %></h1>
+      <p class="mt-2 text-stone-600">
+        Форма: <%= @recipe.base_diameter.presence || "—" %> см ·
+        Порции: <%= @recipe.base_portions.presence || "—" %>
+      </p>
+    </div>
+    <%= link_to "К рецептам", recipes_path, class: "text-rose-600 underline" %>
   </div>
+
+  <section class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+    <h2 class="font-serif text-2xl font-semibold text-stone-900">Ингредиенты</h2>
+    <ul class="mt-4 divide-y divide-stone-100">
+      <% @recipe.ingredients.each do |ingredient| %>
+        <li class="flex justify-between gap-4 py-3">
+          <span><%= ingredient.name %></span>
+          <span class="text-stone-500"><%= ingredient.amount %> <%= ingredient.unit %></span>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+
+  <section class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+    <h2 class="font-serif text-2xl font-semibold text-stone-900">Пересчитать ингредиенты</h2>
+    <p class="mt-2 text-sm text-stone-500">Введите новый параметр формы или количество порций.</p>
+
+    <div class="mt-5 grid gap-4 sm:grid-cols-2">
+      <%= form_with url: recipe_path(@recipe), method: :get, class: "space-y-2" do |form| %>
+        <%= form.label :target_diameter, "Новый диаметр, см", class: "block font-medium" %>
+        <div class="flex gap-2">
+          <%= form.number_field :target_diameter, min: 0, step: 0.1, required: true, class: "w-full rounded-xl border border-stone-300 px-3 py-2 focus:border-rose-300 focus:ring-2 focus:ring-rose-200" %>
+          <%= form.submit "Рассчитать", class: "rounded-xl bg-rose-300 px-3 py-2 font-medium hover:bg-rose-400" %>
+        </div>
+      <% end %>
+
+      <%= form_with url: recipe_path(@recipe), method: :get, class: "space-y-2" do |form| %>
+        <%= form.label :target_portions, "Новые порции, шт.", class: "block font-medium" %>
+        <div class="flex gap-2">
+          <%= form.number_field :target_portions, min: 0, step: 1, required: true, class: "w-full rounded-xl border border-stone-300 px-3 py-2 focus:border-rose-300 focus:ring-2 focus:ring-rose-200" %>
+          <%= form.submit "Рассчитать", class: "rounded-xl bg-rose-300 px-3 py-2 font-medium hover:bg-rose-400" %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @scaled_ingredients.any? %>
+      <div class="mt-6 rounded-xl bg-stone-50 p-4">
+        <h3 class="font-semibold text-stone-900">Результат пересчёта</h3>
+        <ul class="mt-3 divide-y divide-stone-200">
+          <% @scaled_ingredients.each do |ingredient| %>
+            <li class="flex flex-col gap-1 py-3 sm:flex-row sm:items-center sm:justify-between">
+              <span class="font-medium"><%= ingredient[:name] %></span>
+              <span class="text-sm text-stone-600">
+                <%= ingredient[:amount].round(2) %> <%= ingredient[:unit] %>
+                · <%= ingredient[:api][:amount_lb] %> lb
+                · <%= ingredient[:api][:total_cost] %> <%= ingredient[:api][:currency] %>
+              </span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </section>
+
+  <section class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+    <h2 class="font-serif text-2xl font-semibold text-stone-900">Режим готовки</h2>
+    <p class="mt-2 text-sm text-stone-500">Отмечайте выполненные шаги во время приготовления.</p>
+    <div class="mt-4 space-y-3">
+      <% @recipe.steps.order(:order_index, :id).each do |step| %>
+        <label class="flex cursor-pointer items-center gap-3 rounded-xl bg-stone-50 p-4">
+          <input type="checkbox" <%= "checked" if step.is_completed %> class="peer h-5 w-5 accent-rose-300">
+          <span class="peer-checked:text-stone-500 peer-checked:line-through"><%= step.description %></span>
+        </label>
+      <% end %>
+    </div>
+    <button type="button" class="mt-5 rounded-xl bg-stone-200 px-5 py-3 font-semibold text-stone-800 hover:bg-stone-300">
+      ⏱️ Запустить таймер
+    </button>
+  </section>
 </main>
