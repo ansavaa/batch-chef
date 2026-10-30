@@ -72,6 +72,10 @@ class RecipesController < ApplicationController
       amount.to_f / 1000
     when "kg", "кг"
       amount.to_f
+    when "ml", "мл"
+      amount.to_f / 1000
+    when "l", "л"
+      amount.to_f
     else
       amount.to_f
     end
