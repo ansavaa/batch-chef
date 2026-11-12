@@ -6,12 +6,11 @@
     <div>
       <h1 class="font-serif text-4xl font-semibold text-stone-900"><%= @recipe.title %></h1>
       <% if @recipe.photo.attached? %>
-        <%= image_tag @recipe.photo, class: "mt-4 h-56 w-full rounded-xl object-cover", alt: @recipe.title %>
+        <%= image_tag @recipe.photo, class: "mt-4 aspect-[16/9] w-full rounded-xl object-cover", alt: @recipe.title %>
       <% end %>
-      <p class="mt-2 text-stone-600">
-        Форма: <%= @recipe.base_diameter.presence || "—" %> см ·
-        Порции: <%= @recipe.base_portions.presence || "—" %>
-      </p>
+      <% if recipe_size_details(@recipe).present? %>
+        <p class="mt-2 text-stone-600"><%= recipe_size_details(@recipe) %></p>
+      <% end %>
     </div>
     <%= link_to "К каталогу", public_recipes_path,
         class: "shrink-0 whitespace-nowrap rounded-xl bg-rose-100 px-4 py-2 font-medium text-rose-700 hover:bg-rose-200" %>
@@ -20,8 +19,10 @@
   <div class="flex flex-wrap items-center gap-4 text-sm text-stone-500">
     <span>Просмотры: <strong id="recipe_views"><%= @recipe.views_count %></strong></span>
     <span>Лайки: <strong id="recipe_likes"><%= render "likes_count", recipe: @recipe %></strong></span>
-    <% if @current_user %>
+    <% if @current_user && @recipe.published? %>
       <%= render "like_button", recipe: @recipe, liked: @liked %>
+    <% elsif @current_user %>
+      <span class="text-sm text-stone-500">Лайки доступны только для опубликованных рецептов.</span>
     <% else %>
       <%= link_to "Войдите, чтобы поставить лайк", login_path, class: "text-rose-600 underline" %>
     <% end %>
@@ -29,14 +30,21 @@
 
   <section class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
     <h2 class="font-serif text-2xl font-semibold text-stone-900">Ингредиенты</h2>
-    <ul class="mt-4 divide-y divide-stone-100">
-      <% @recipe.ingredients.each do |ingredient| %>
-        <li class="flex justify-between gap-4 py-3">
-          <span><%= ingredient.name %></span>
-          <span class="text-stone-500"><%= ingredient.amount %> <%= ingredient.unit %></span>
-        </li>
+    <div class="mt-4 space-y-5">
+      <% @recipe.ingredients.group_by { |ingredient| ingredient.stage.to_s.strip.presence || "Основные ингредиенты" }.each do |stage, ingredients| %>
+        <div>
+          <h3 class="mb-2 text-sm font-semibold uppercase tracking-wide text-rose-600"><%= stage %></h3>
+          <ul class="divide-y divide-stone-100">
+            <% ingredients.each do |ingredient| %>
+              <li class="flex justify-between gap-4 py-3">
+                <span><%= ingredient.name %></span>
+                <span class="text-stone-500"><%= ingredient.amount %> <%= ingredient.unit %></span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-    </ul>
+    </div>
   </section>
 
   <section class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
@@ -114,10 +122,12 @@
       <% end %>
     </div>
 
-    <% if @current_user %>
+    <% if @current_user && @recipe.published? %>
       <div class="mt-6">
         <%= render "comments/form", recipe: @recipe, comment: @recipe.comments.build %>
       </div>
+    <% elsif @current_user %>
+      <p class="mt-6 text-sm text-stone-500">Комментировать можно только публичные рецепты.</p>
     <% else %>
       <%= link_to "Войдите, чтобы оставить комментарий", login_path,
           class: "mt-6 inline-block text-rose-600 underline" %>

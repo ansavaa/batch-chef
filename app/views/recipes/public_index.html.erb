@@ -15,14 +15,13 @@
       <article class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
         <h2 class="font-serif text-2xl font-semibold text-stone-900">
           <% if recipe.photo.attached? %>
-            <%= image_tag recipe.photo, class: "mb-3 h-24 w-full rounded-xl object-cover", alt: recipe.title %>
+            <%= image_tag recipe.photo, class: "mb-3 aspect-[4/3] w-full rounded-xl object-cover", alt: recipe.title %>
           <% end %>
           <%= link_to recipe.title, recipe_path(recipe), class: "hover:text-rose-600" %>
         </h2>
-        <p class="mt-2 text-sm text-stone-500">
-          Форма: <%= recipe.base_diameter.presence || "—" %> см ·
-          Порции: <%= recipe.base_portions.presence || "—" %>
-        </p>
+        <% if recipe_size_details(recipe).present? %>
+          <p class="mt-2 text-sm text-stone-500"><%= recipe_size_details(recipe) %></p>
+        <% end %>
         <%= link_to "Открыть рецепт", recipe_path(recipe),
             class: "mt-4 inline-block text-rose-600 underline" %>
       </article>

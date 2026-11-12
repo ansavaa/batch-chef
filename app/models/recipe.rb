@@ -8,7 +8,13 @@ class Recipe < ApplicationRecord
   has_many :steps, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
-  accepts_nested_attributes_for :ingredients, allow_destroy: true
+  accepts_nested_attributes_for :ingredients,
+                                allow_destroy: true,
+                                reject_if: ->(attributes) {
+                                  attributes["name"].blank? &&
+                                    attributes["amount"].blank? &&
+                                    attributes["unit"].blank?
+                                }
   accepts_nested_attributes_for :steps, allow_destroy: true
 
   validates :title, presence: true

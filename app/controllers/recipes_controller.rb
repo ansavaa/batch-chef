@@ -100,7 +100,7 @@ class RecipesController < ApplicationController
       :base_diameter,
       :base_portions,
       :photo,
-      ingredients_attributes: %i[id name amount unit _destroy],
+      ingredients_attributes: %i[id name amount unit stage _destroy],
       steps_attributes: %i[id description is_completed _destroy]
     )
   end

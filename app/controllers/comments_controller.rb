@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :require_login
   before_action :set_recipe
+  before_action :require_public_recipe
 
   def create
     @comment = @recipe.comments.build(comment_params)
@@ -39,6 +40,12 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body)
+  end
+
+  def require_public_recipe
+    return if @recipe.published?
+
+    redirect_to @recipe, alert: "Комментировать можно только публичные рецепты."
   end
 
   def require_login

@@ -5,14 +5,15 @@
     <ol class="mt-4 space-y-3">
       <% recipes = local_assigns.fetch(:recipes) { Recipe.published.order(likes_count: :desc, created_at: :desc).limit(3) } %>
       <% recipes.each do |recipe| %>
-        <li class="flex items-center justify-between gap-4">
-          <div class="flex items-center gap-3">
-            <% if recipe.photo.attached? %>
-              <%= image_tag recipe.photo, class: "h-12 w-12 rounded-lg object-cover", alt: recipe.title %>
-            <% end %>
-            <%= link_to recipe.title, recipe_path(recipe), class: "text-rose-600 underline" %>
-          </div>
-          <span class="text-sm text-stone-500"><%= recipe.likes_count %> ♥</span>
+        <li class="grid grid-cols-[3.5rem_minmax(0,1fr)_auto] items-center gap-3 border-b border-stone-200 pb-3 last:border-b-0 last:pb-0">
+          <% if recipe.photo.attached? %>
+            <%= image_tag recipe.photo, class: "h-14 w-14 rounded-lg object-cover", alt: recipe.title %>
+          <% else %>
+            <div class="h-14 w-14 rounded-lg bg-stone-100" aria-hidden="true"></div>
+          <% end %>
+          <%= link_to recipe.title, recipe_path(recipe),
+              class: "min-w-0 break-words text-rose-600 underline" %>
+          <span class="whitespace-nowrap text-sm text-stone-500"><%= recipe.likes_count %> ♥</span>
         </li>
       <% end %>
     </ol>
