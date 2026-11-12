@@ -1,0 +1,6 @@
+<div id="like_button">
+  <%= button_to like_recipe_path(recipe), method: :post,
+      class: "rounded-xl bg-rose-100 px-4 py-2 font-semibold text-rose-700 hover:bg-rose-200" do %>
+    <%= liked ? "♥ Понравилось" : "♡ Нравится" %>
+  <% end %>
+</div>

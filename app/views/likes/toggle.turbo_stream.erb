@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "like_button" do %>
+  <%= render "recipes/like_button", recipe: @recipe, liked: @liked %>
+<% end %>

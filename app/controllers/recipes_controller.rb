@@ -14,7 +14,9 @@ class RecipesController < ApplicationController
       return
     end
 
+    record_recipe_view
     @scaled_ingredients = scaled_ingredients_with_cost
+    @liked = @current_user && @recipe.likes.exists?(user: @current_user)
   end
 
   def public_index
@@ -65,6 +67,21 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
   end
 
+  def record_recipe_view
+    return unless @current_user
+
+    RecipeView.create!(recipe: @recipe, user: @current_user)
+    @recipe.increment!(:views_count)
+    Turbo::StreamsChannel.broadcast_update_to(
+      @recipe,
+      target: "recipe_views",
+      partial: "recipes/views_count",
+      locals: { recipe: @recipe }
+    )
+  rescue ActiveRecord::RecordNotUnique
+    # The unique database index prevents duplicate views for one user and recipe.
+  end
+
   def authorize_recipe!
     return if @recipe.user_id == @current_user.id
 
@@ -82,6 +99,7 @@ class RecipesController < ApplicationController
       :title,
       :base_diameter,
       :base_portions,
+      :photo,
       ingredients_attributes: %i[id name amount unit _destroy],
       steps_attributes: %i[id description is_completed _destroy]
     )

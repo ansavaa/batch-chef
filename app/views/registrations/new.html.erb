@@ -1,34 +1,59 @@
-<main class="mx-auto max-w-md px-6 py-12">
-  <h1 class="mb-6 text-3xl font-bold text-gray-900">Create an account</h1>
+<main class="flex min-h-[calc(100vh-73px)] items-center justify-center bg-stone-50 px-6 py-12">
+  <section class="w-full max-w-sm rounded-2xl border border-stone-200 bg-white p-8 shadow-sm sm:p-10">
+    <div class="mb-8 text-center">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-rose-400">Batch Chef</p>
+      <h1 class="font-serif text-3xl font-semibold text-stone-900">Регистрация</h1>
+      <p class="mt-3 text-sm leading-6 text-stone-500">
+        Создайте аккаунт, чтобы сохранять и пересчитывать рецепты
+      </p>
+    </div>
 
-  <% if @user.errors.any? %>
-    <div class="mb-6 rounded border border-red-200 bg-red-50 p-4 text-red-700">
-      <ul class="list-disc pl-5">
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <% if @user.errors.any? %>
+      <div class="mb-6 rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700">
+        <ul class="list-disc pl-5">
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  <%= form_with model: @user, url: signup_path, class: "space-y-5" do |form| %>
-    <div>
-      <%= form.label :email, class: "mb-1 block font-medium text-gray-700" %>
-      <%= form.email_field :email, required: true, autofocus: true,
-          class: "w-full rounded border border-gray-300 px-3 py-2" %>
-    </div>
-    <div>
-      <%= form.label :password, class: "mb-1 block font-medium text-gray-700" %>
-      <%= form.password_field :password, required: true,
-          class: "w-full rounded border border-gray-300 px-3 py-2" %>
-    </div>
-    <div>
-      <%= form.label :password_confirmation, "Confirm password",
-          class: "mb-1 block font-medium text-gray-700" %>
-      <%= form.password_field :password_confirmation, required: true,
-          class: "w-full rounded border border-gray-300 px-3 py-2" %>
-    </div>
-    <%= form.submit "Sign up",
-        class: "w-full rounded bg-green-600 px-4 py-2 font-medium text-white hover:bg-green-700" %>
-  <% end %>
+    <%= form_with model: @user, url: signup_path, class: "space-y-5" do |form| %>
+      <div>
+        <%= form.label :email, "Email", class: "mb-2 block font-medium text-stone-800" %>
+        <%= form.email_field :email, required: true, autofocus: true,
+            placeholder: "you@example.com",
+            class: "w-full cursor-text rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-stone-900 shadow-sm outline-none transition-all placeholder:text-stone-400 focus:border-rose-300 focus:ring-2 focus:ring-rose-200" %>
+        <p class="mt-2 text-sm text-stone-500">Используйте email, к которому у вас есть доступ.</p>
+      </div>
+
+      <div>
+        <%= form.label :password, "Пароль", class: "mb-2 block font-medium text-stone-800" %>
+        <%= form.password_field :password, required: true,
+            placeholder: "Придумайте пароль",
+            class: "w-full cursor-text rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-stone-900 shadow-sm outline-none transition-all placeholder:text-stone-400 focus:border-rose-300 focus:ring-2 focus:ring-rose-200" %>
+        <p class="mt-2 text-sm text-stone-500">Пароль нужен для безопасного входа.</p>
+      </div>
+
+      <div>
+        <%= form.label :password_confirmation, "Подтвердите пароль",
+            class: "mb-2 block font-medium text-stone-800" %>
+        <%= form.password_field :password_confirmation, required: true,
+            placeholder: "Повторите пароль",
+            class: "w-full cursor-text rounded-xl border border-stone-300 bg-stone-50 px-4 py-3 text-stone-900 shadow-sm outline-none transition-all placeholder:text-stone-400 focus:border-rose-300 focus:ring-2 focus:ring-rose-200" %>
+      </div>
+
+      <button type="submit"
+          class="w-full cursor-pointer rounded-xl bg-rose-300 px-5 py-3.5 font-semibold text-stone-900 shadow-sm transition-all hover:bg-rose-400 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-rose-200">
+        Создать аккаунт
+      </button>
+      <p class="text-center text-sm text-stone-500">После регистрации вы попадете в каталог рецептов.</p>
+    <% end %>
+
+    <p class="mt-8 text-center text-sm text-stone-500">
+      Уже есть аккаунт?
+      <%= link_to "Войти", login_path,
+          class: "cursor-pointer font-semibold text-rose-500 underline decoration-rose-200 underline-offset-4 transition-all hover:text-rose-600" %>
+    </p>
+  </section>
 </main>

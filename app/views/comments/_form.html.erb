@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "new_comment" do %>
+  <%= form_with model: [recipe, comment], class: "space-y-3" do |form| %>
+    <% if comment.errors.any? %>
+      <p class="text-sm text-rose-700"><%= comment.errors.full_messages.to_sentence %></p>
+    <% end %>
+    <%= form.text_area :body, placeholder: "Напишите комментарий", required: true,
+        class: "w-full rounded-xl border border-stone-300 px-4 py-3" %>
+    <%= form.submit "Добавить комментарий",
+        class: "rounded-xl bg-rose-300 px-4 py-2 font-semibold text-stone-900" %>
+  <% end %>
+<% end %>

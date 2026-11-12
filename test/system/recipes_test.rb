@@ -22,7 +22,8 @@ class RecipesTest < ActionDispatch::SystemTestCase
     @user_b_recipe = @user_b.recipes.create!(
       title: "Рецепт пользователя B",
       base_diameter: 20,
-      base_portions: 10
+      base_portions: 10,
+      published: true
     )
   end
 
@@ -39,16 +40,17 @@ class RecipesTest < ActionDispatch::SystemTestCase
     fill_in "Например, взбейте яйца с сахаром", with: "Смешать ингредиенты"
     click_button "Сохранить рецепт"
 
-    assert Recipe.exists?(title: "Шоколадный торт", user: @user_a)
+    assert_current_path %r{\A/recipes/\d+\z}
+    assert_text "Шоколадный торт"
     assert_text(/рецепт.*сохран/i)
   end
 
   test "user cannot edit another user's recipe" do
     log_in_as(@user_a)
-    visit edit_recipe_path(@user_b_recipe)
+    page.driver.visit "#{page.server_url}/recipes/#{@user_b_recipe.id}/edit"
 
-    assert_current_path root_path
-    assert_text(/доступ.*запрещён|доступ.*запрещен/i)
+    assert_equal root_path, page.current_path
+    assert_includes page.text, "Доступ к этому рецепту запрещён."
   end
 
   test "recipe cannot be saved without a title" do
@@ -71,6 +73,19 @@ class RecipesTest < ActionDispatch::SystemTestCase
     visit new_recipe_path
 
     assert_current_path login_path
+  end
+
+  test "counts one view per recipe visit from the same user" do
+    log_in_as(@user_a)
+    page.driver.visit "#{page.server_url}/recipes/#{@user_b_recipe.id}"
+    assert_equal 1, @user_b_recipe.reload.views_count
+
+    refresh
+    assert_equal 1, @user_b_recipe.reload.views_count
+
+    page.driver.visit page.server_url
+    page.driver.visit "#{page.server_url}/recipes/#{@user_b_recipe.id}"
+    assert_equal 1, @user_b_recipe.reload.views_count
   end
 
   private

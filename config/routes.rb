@@ -10,8 +10,10 @@ Rails.application.routes.draw do
 
   get "/catalog", to: "recipes#public_index", as: :public_recipes
   resources :recipes do
+    resources :comments, only: :create
     member do
       patch :toggle_publication
+      post :like, to: "likes#toggle"
     end
   end
   get "/ui", to: "pages#ui_kit", as: :ui_kit

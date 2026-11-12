@@ -2,9 +2,12 @@ class Recipe < ApplicationRecord
   scope :published, -> { where(published: true) }
 
   belongs_to :user
+  has_one_attached :photo
 
   has_many :ingredients, dependent: :destroy
   has_many :steps, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   accepts_nested_attributes_for :ingredients, allow_destroy: true
   accepts_nested_attributes_for :steps, allow_destroy: true
 

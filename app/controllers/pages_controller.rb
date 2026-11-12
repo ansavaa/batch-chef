@@ -4,5 +4,6 @@ class PagesController < ApplicationController
     @catalog_recipes = Recipe.published
                              .where("title ILIKE ?", "%#{ActiveRecord::Base.sanitize_sql_like(@catalog_query)}%")
                              .order(created_at: :desc)
+    @top_recipes = Recipe.published.order(likes_count: :desc, created_at: :desc).limit(3)
   end
 end
