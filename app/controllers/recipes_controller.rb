@@ -1,5 +1,7 @@
 class RecipesController < ApplicationController
   before_action :require_login, except: %i[public_index show]
+  before_action :set_recipe, only: %i[edit update]
+  before_action :authorize_recipe!, only: %i[edit update]
 
   def index
     @recipes = @current_user.recipes
@@ -40,13 +42,34 @@ class RecipesController < ApplicationController
     @recipe = @current_user.recipes.build(recipe_params)
 
     if @recipe.save
-      redirect_to @recipe
+      redirect_to @recipe, notice: "Рецепт «#{@recipe.title}» сохранён."
     else
       render :new, status: :unprocessable_entity
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @recipe.update(recipe_params)
+      redirect_to @recipe, notice: "Рецепт «#{@recipe.title}» обновлён."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
+
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
+
+  def authorize_recipe!
+    return if @recipe.user_id == @current_user.id
+
+    redirect_to root_path, alert: "Доступ к этому рецепту запрещён."
+  end
 
   def require_login
     return if @current_user
